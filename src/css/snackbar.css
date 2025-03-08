@@ -27,6 +27,7 @@ border: 1px solid #808080;
     margin-bottom: 16px;
     padding: 0;
     box-sizing: border-box;
+    padding-left: 12px;
 }
 
 input[type="number"]:hover{
@@ -121,3 +122,5 @@ button {
 button:hover{
     background-color: #6c8cff;
 }
+
+
