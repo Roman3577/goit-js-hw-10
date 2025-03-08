@@ -45,7 +45,8 @@ flatpickr(input, {
     userSelectedDate = selectedDates[0];
 
     if (userSelectedDate > new Date()) {
-      startButton.disabled = false;
+        startButton.disabled = false;
+        input.disabled = true;
     } else {
       iziToast.error({
         title: "Error",
@@ -54,7 +55,8 @@ flatpickr(input, {
         timeout: 3000,
       });
 
-      startButton.disabled = true;
+        startButton.disabled = true;
+        input.disabled = false;
     }
   },
 });
@@ -62,13 +64,15 @@ flatpickr(input, {
 
 startButton.addEventListener("click", () => {
   startButton.disabled = true;
-
+input.disabled = true;
   timerId = setInterval(() => {
     const currentTime = new Date();
     const timeDifference = userSelectedDate - currentTime;
 
     if (timeDifference <= 0) {
-      clearInterval(timerId);
+        clearInterval(timerId);
+         startButton.disabled = false;
+         input.disabled = false;
       return;
     }
 
