@@ -9,10 +9,11 @@ let userSelectedDate = null;
 let timerId = null;
 
 
+startButton.disabled = true;
+
 function addLeadingZero(value) {
   return String(value).padStart(2, "0");
 }
-
 
 function convertMs(ms) {
   const second = 1000;
@@ -45,8 +46,7 @@ flatpickr(input, {
     userSelectedDate = selectedDates[0];
 
     if (userSelectedDate > new Date()) {
-        startButton.disabled = false;
-        input.disabled = true;
+      startButton.disabled = false;
     } else {
       iziToast.error({
         title: "Error",
@@ -55,8 +55,7 @@ flatpickr(input, {
         timeout: 3000,
       });
 
-        startButton.disabled = true;
-        input.disabled = false;
+      startButton.disabled = true;
     }
   },
 });
@@ -64,15 +63,17 @@ flatpickr(input, {
 
 startButton.addEventListener("click", () => {
   startButton.disabled = true;
-input.disabled = true;
+  input.disabled = true;
+
   timerId = setInterval(() => {
     const currentTime = new Date();
     const timeDifference = userSelectedDate - currentTime;
 
     if (timeDifference <= 0) {
-        clearInterval(timerId);
-         startButton.disabled = false;
-         input.disabled = false;
+      clearInterval(timerId);
+      startButton.disabled = true;
+      input.disabled = false;
+      updateTimerInterface({ days: 0, hours: 0, minutes: 0, seconds: 0 });
       return;
     }
 
